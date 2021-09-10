@@ -1,0 +1,181 @@
+1.) ng new etester
+
+2.) cd etester
+
+3.) node -v
+	v14.17.6
+
+4.) ng version
+
+		     _                      _                 ____ _     ___
+		    / \   _ __   __ _ _   _| | __ _ _ __     / ___| |   |_ _|
+		   / ? \ | '_ \ / _` | | | | |/ _` | '__|   | |   | |    | |
+		  / ___ \| | | | (_| | |_| | | (_| | |      | |___| |___ | |
+		 /_/   \_\_| |_|\__, |\__,_|_|\__,_|_|       \____|_____|___|
+				|___/
+
+
+		Angular CLI: 11.1.4
+		Node: 14.17.6
+		OS: win32 x64
+
+		Angular: 11.1.2
+		... animations, common, compiler, compiler-cli, core, forms
+		... platform-browser, platform-browser-dynamic, router
+		Ivy Workspace: Yes
+
+		Package                         Version
+		---------------------------------------------------------
+		@angular-devkit/architect       0.1101.4
+		@angular-devkit/build-angular   0.1101.4
+		@angular-devkit/core            11.1.4
+		@angular-devkit/schematics      11.1.4
+		@angular/cli                    11.1.4
+		@schematics/angular             11.1.4
+		@schematics/update              0.1101.4
+		rxjs                            6.6.7
+		typescript                      4.1.6
+
+
+5.) Update angular to (12.2.5) from (11.1.4)
+	ng update
+	
+		The installed local Angular CLI version is older than the latest stable version.
+		Installing a temporary version to perform the update.
+		Installing packages for tooling via npm.
+		Installed packages for tooling via npm.
+		Using package manager: 'npm'
+		Collecting installed dependencies...
+		Found 28 dependencies.
+		    We analyzed your package.json, there are some packages to update:
+
+		      Name                               Version                  Command to update
+		     --------------------------------------------------------------------------------
+		      @angular/cli                       11.1.4 -> 12.2.5         ng update @angular/cli
+		      @angular/core                      11.1.2 -> 12.2.5         ng update @angular/core
+
+		    There might be additional packages which don't provide 'ng update' capabilities that are outdated.
+		    You can update the additional packages by running the update command of your package manager.
+
+
+
+6.) ng update @angular/cli @angular/core --allow-dirty --force
+
+7.) npm i -D typescript@4.3.5
+	Only if necessary.  It may already be there after the previous commands
+
+8.) ng version (to verify)
+	ng version
+
+     _                      _                 ____ _     ___
+    / \   _ __   __ _ _   _| | __ _ _ __     / ___| |   |_ _|
+   / ? \ | '_ \ / _` | | | | |/ _` | '__|   | |   | |    | |
+  / ___ \| | | | (_| | |_| | | (_| | |      | |___| |___ | |
+ /_/   \_\_| |_|\__, |\__,_|_|\__,_|_|       \____|_____|___|
+                |___/
+
+
+Angular CLI: 12.2.5
+Node: 14.17.6
+Package Manager: npm 6.14.11
+OS: win32 x64
+
+Angular: 12.2.5
+... animations, cli, common, compiler, compiler-cli, core, forms
+... platform-browser, platform-browser-dynamic, router
+
+Package                         Version
+---------------------------------------------------------
+@angular-devkit/architect       0.1202.5
+@angular-devkit/build-angular   12.2.5
+@angular-devkit/core            12.2.5
+@angular-devkit/schematics      12.2.5
+@schematics/angular             12.2.5
+rxjs                            6.6.7
+typescript                      4.3.5
+
+
+9.) Looks like I am importing Angular Materials....in a component. Although I am not using it.
+	import { Observable } from 'rxjs';
+	import {map} from 'rxjs/operators';
+
+	import { MatPaginator } from '@angular/material/paginator';
+	import { MatTableDataSource } from '@angular/material/table';
+
+
+10.) Install Angular Materials - After you upgrade Angular
+I purposefully DID NOT run this in the project folder. (ran in its parent)
+	npm install --save @angular/material @angular/cdk
+	npm install --save @angular/animations
+
+
+
+11.) I still have problems with @angular/material/paginator
+
+	C:\angular\CLI\etester>ng build
+	- Generating browser application bundles (phase: setup)...
+	An error occurred during the build:
+	Error: The target entry-point "@angular/material/paginator" has missing dependencies:
+	 - @angular/common
+	 - @angular/core
+	 - rxjs
+
+	    at TargetedEntryPointFinder.findEntryPoints (C:\angular\CLI\etester\node_modules\@angular\compiler-cli\ngcc\src\entry_point_finder\targeted_entry_point_finder.js:40:23)
+	    at C:\angular\CLI\etester\node_modules\@angular\compiler-cli\ngcc\src\execution\analyze_entry_points.js:29:41
+	    at SingleProcessExecutorSync.SingleProcessorExecutorBase.doExecute (C:\angular\CLI\etester\node_modules\@angular\compiler-cli\ngcc\src\execution\single_process_executor.js:28:29)
+	    at C:\angular\CLI\etester\node_modules\@angular\compiler-cli\ngcc\src\execution\single_process_executor.js:57:59
+	    at SyncLocker.lock (C:\angular\CLI\etester\node_modules\@angular\compiler-cli\ngcc\src\locking\sync_locker.js:34:24)
+	    at SingleProcessExecutorSync.execute (C:\angular\CLI\etester\node_modules\@angular\compiler-cli\ngcc\src\execution\single_process_executor.js:57:27)
+	    at Object.mainNgcc (C:\angular\CLI\etester\node_modules\@angular\compiler-cli\ngcc\src\main.js:74:25)
+	    at Object.process (C:\angular\CLI\etester\node_modules\@angular\compiler-cli\ngcc\index.js:29:23)
+	    at NgccProcessor.processModule (C:\angular\CLI\etester\node_modules\@ngtools\webpack\src\ngcc_processor.js:175:16)
+	    at C:\angular\CLI\etester\node_modules\@ngtools\webpack\src\ivy\host.js:146:18
+	An unhandled exception occurred: The target entry-point "@angular/material/paginator" has missing dependencies:
+	 - @angular/common
+	 - @angular/core
+	 - rxjs
+
+	See "C:\Users\SKANTE~1\AppData\Local\Temp\ng-eXKTKi\angular-errors.log" for further details.
+
+12.) Run these installs in the project folder{
+npm install --save @angular/material @angular/cdk
+npm install --save @angular/animations
+
+
+	C:\angular\CLI\etester>npm install --save @angular/material @angular/cdk
+	npm WARN @babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining@7.15.4 requires a peer of @babel/core@^7.13.0 but none is installed. You must install peer dependencies yourself.
+	npm WARN angular-material@1.2.3 requires a peer of angular@^1.7.2 but none is installed. You must install peer dependencies yourself.
+	npm WARN angular-material@1.2.3 requires a peer of angular-animate@^1.7.2 but none is installed. You must install peer dependencies yourself.
+	npm WARN angular-material@1.2.3 requires a peer of angular-aria@^1.7.2 but none is installed. You must install peer dependencies yourself.
+	npm WARN angular-material@1.2.3 requires a peer of angular-messages@^1.7.2 but none is installed. You must install peer dependencies yourself.
+	npm WARN karma-jasmine-html-reporter@1.7.0 requires a peer of jasmine-core@>=3.8 but none is installed. You must install peer dependencies yourself.
+
+	+ @angular/cdk@12.2.5
+	+ @angular/material@12.2.5
+	added 3 packages from 1 contributor, removed 1 package and audited 1425 packages in 27.275s
+
+	89 packages are looking for funding
+	  run `npm fund` for details
+
+	found 1 moderate severity vulnerability
+	  run `npm audit fix` to fix them, or `npm audit` for details
+
+	C:\angular\CLI\etester>npm install --save @angular/animations
+	npm WARN @babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining@7.15.4 requires a peer of @babel/core@^7.13.0 but none is installed. You must install peer dependencies yourself.
+	npm WARN angular-material@1.2.3 requires a peer of angular@^1.7.2 but none is installed. You must install peer dependencies yourself.
+	npm WARN angular-material@1.2.3 requires a peer of angular-animate@^1.7.2 but none is installed. You must install peer dependencies yourself.
+	npm WARN angular-material@1.2.3 requires a peer of angular-aria@^1.7.2 but none is installed. You must install peer dependencies yourself.
+	npm WARN angular-material@1.2.3 requires a peer of angular-messages@^1.7.2 but none is installed. You must install peer dependencies yourself.
+	npm WARN karma-jasmine-html-reporter@1.7.0 requires a peer of jasmine-core@>=3.8 but none is installed. You must install peer dependencies yourself.
+
+	+ @angular/animations@12.2.5
+	updated 1 package and audited 1425 packages in 19.17s
+
+	89 packages are looking for funding
+	  run `npm fund` for details
+
+	found 1 moderate severity vulnerability
+	  run `npm audit fix` to fix them, or `npm audit` for details
+
+13.) DONE.  DONE.  DONE.  Build worked.
+
